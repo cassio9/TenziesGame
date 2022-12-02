@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import Dice from "./components/Dice";
 import Confetti from "react-confetti";
 import { nanoid } from "nanoid";
 import useWindowSize from "./hooks/ConfettiSize";
+import "./App.css";
 
 function App() {
 	const allTimeRecord = Number(localStorage.getItem("RecordTenzies") || 50);
@@ -58,7 +58,7 @@ function App() {
 		const allSameValue = randomNumbers.every((die) => die.number === firstValue);
 		if (allHeld && allSameValue) {
 			setWin(true);
-			// put delay into this "if statement", in order to our Winner record render the proper value
+			// put delay into this "if statement", in order to Winner record render the proper value
 			setTimeout(() => {
 				if (count < allTimeRecord || !allTimeRecord) {
 					localStorage.setItem("RecordTenzies", count);
@@ -68,7 +68,7 @@ function App() {
 		return () => clearTimeout();
 	}, [randomNumbers]);
 
-	let DiceGame = randomNumbers.map((elem) => {
+	const DiceGame = randomNumbers.map((elem) => {
 		return (
 			<Dice num={elem.number} key={elem.id} on={elem.on} StopRoll={() => SelectNumber(elem.id)} />
 		);
